@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Items Catalog</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="/static/styles.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+		</script>
+		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+		</script>
+		<script>
+			function myFunction() {
+				alert("{{error}}");
+			}
+		</script>
+	</head>
+	<body>
+		{% if error is defined %}
+			<script type="text/javascript">
+				myFunction();
+			</script>
+		{% endif %}
+		<div class="container-fluid">
+			<!--HEADER SECTION-->
+			<header class ="row">
+				<section class= "banner">
+					<div class="col-md-7 col-md-offset-2 col-sm-12 col-xs-12">
+						<h1 class="text-left"><a href="/">Items Catalog</a></h1>
+					</div>
+					<div class="col-md-1 col-sm-5 col-xs-10">
+						{% if login_session.access_token %}
+						  <a href="/gdisconnect" class="btn btn-primary">log out</a>
+						{% else %}
+						  <a href="/login" class="btn btn-primary">log in</a>
+						{% endif %}
+					</div>
+				</section>
+			</header>
+		</div>
+		<div class="mainContent col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+				<h3><a href="/new/">Add New Item</a></h3>
+				<div class="col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+					<section class ="categories">
+						<h2>Categories</h2>
+						<ul>
+							<a href="/"><li>All Items</li></a>
+							<a href="/category/Clothing/"><li>Clothing</li></a>
+							<a href="/category/Food/"><li>Food</li></a>
+							<a href="/category/Place/"><li>Place</li></a>
+							<a href="/category/Misc/"><li>Misc</li></a>
+						</ul>
+					</section>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<section class ="items">
+						{% block content %}
+						<h2>{{currentCategory}}</h2>
+						{% for item in items %}
+						<ul>
+							<a href="/category/{{item.category}}/{{item.id}}/"><li>{{item.itemName}}</li></a>
+						</ul>
+						{% endfor %}
+						{% endblock %}
+					</section>
+				</div>
+		</div>
+	</body>
+</html>

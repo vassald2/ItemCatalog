@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Items Catalog</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="/static/styles.css">
+		<script>
+			function myFunction() {
+				alert("{{error}}");
+			}
+		</script>
+	</head>
+	<body>
+		{% if error is defined %}
+			<script type="text/javascript">
+				myFunction();
+			</script>
+		{% endif %}
+		<div class="container-fluid">
+			<!--HEADER SECTION-->
+			<header class ="row">
+				<section class= "banner">
+						<div class="col-md-7 col-md-offset-2 col-sm-12 col-xs-12">
+							<h1 class="text-left"><a href="/">Items Catalog</a></h1>
+						</div>
+						<div class="col-md-1 col-sm-5 col-xs-10">
+							{% if login_session.access_token %}
+							  <a href="/gdisconnect" class="btn btn-primary">log out</a>
+							{% else %}
+							  <a href="/login" class="btn btn-primary">log in</a>
+							{% endif %}
+						</div>
+				</section>
+			</header>
+		</div>
+		<div class="mainContent col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+					<h2>{{currentCategory}}</h2>
+					<form action="#" method = "post">
+						<div class="form-group">
+							<label for="name">Name:</label>
+							<input type ="text" maxlength="50" class="form-control" name="name"placeholder="Item Name" required>
+
+							<label for="description">Description:</label>
+							<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Item Description" required></textarea>
+
+							<label class="radio-inline"><input type="radio" value="Clothing" name="category" checked="checked">Clothing</label>
+							<label class="radio-inline"><input type="radio" value="Food" name="category">Food</label>
+							<label class="radio-inline"><input type="radio" value="Place" name="category">Place</label>
+							<label class="radio-inline"><input type="radio" value="Misc" name="category">Misc</label></br>
+
+							<button type="submit" class="btn btn-default" id="submit" type="submit">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+							<a href = '{{url_for('allItems')}}'>
+								<button class="btn btn-default delete" type="button">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+							</a>
+						</div>
+					</form>
+		</div>
+	</body>
+</html>
