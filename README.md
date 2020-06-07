@@ -1,6 +1,8 @@
 # Item-Catalog
 Create an item catalog for adding editing and removing items from a database.
 
+This project is a part of Udacity Full Stack Web Developer Nanodegree
+
 ### How to Run
 # Running the code
 1. Download the zip file
